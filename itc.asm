@@ -24,7 +24,7 @@ next:
 
 xt_interpreter: dq i_interpreter
 i_interpreter:
-	jmp i_exit
+	jmp i_bye
 	
 _start:
 	jmp init

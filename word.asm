@@ -59,7 +59,7 @@ native "cfa", cfa, 0
 	mov rax, rdi
 	ret
 
-native "exit", exit, 0
+native "bye", bye, 0
 	mov rax, 60
 	xor rdi, rdi
 	syscall

@@ -7,12 +7,12 @@ find_test:
 	mov rdi, testdata
 	mov rsi, w_dict_entry_stub
 	call i_find
-	call test_exit
+	call test_bye
 
 cfa_test:
-	mov rdi, w_exit 	; w_find is test word
+	mov rdi, w_bye 	; w_find is test word
 	call i_cfa
-	call test_exit
+	call test_bye
 
 find_and_cfa_test:
 	mov rdi, testdata
@@ -20,9 +20,9 @@ find_and_cfa_test:
 	call i_find
 	mov rdi, rax
 	call i_cfa
-	call test_exit
+	call test_bye
 
-test_exit:
+test_bye:
 	mov rax, 60
 	xor rdi, rdi
 	syscall
