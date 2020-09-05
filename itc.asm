@@ -10,6 +10,7 @@
 	section .bss
 	resq 1023
 rstack_start:	 resq 1
+input_buffer:	 resb 1024
 
 %include "word.asm"
 %include "test.asm"
@@ -36,6 +37,9 @@ interpreter_stub: dq 0
 	section .text
 xt_interpreter: dq i_docol
 i_interpreter:
+	dq xt_inbuf
+	dq xt_word
+	dq xt_drop
 	dq xt_exit
 	
 _start:

@@ -76,4 +76,18 @@ native "exit", exit, 0
 	add rstack, 8
 	jmp next
 
+native "inbuf", inbuf, 0
+	push qword input_buffer
+	jmp next
+
+native "word", word, 0
+	pop rdi
+	call read_word
+	push rdx
+	jmp next
+
+native "drop", drop, 0
+	add rsp, 8
+	jmp next
+
 native "dict_entry_stub", dict_entry_stub, 0
