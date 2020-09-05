@@ -29,6 +29,11 @@ next:
 	add pc, 8
 	jmp [w]
 
+
+;;; interpreter loop
+	section .data
+interpreter_stub: dq 0
+	section .text
 xt_interpreter: dq i_docol
 i_interpreter:
 	dq xt_exit
