@@ -6,7 +6,7 @@ all: main
 main: itc.o 
 	ld -o main itc.o 
 
-itc.o: itc.asm lib.inc macro.inc word.inc
+itc.o: itc.asm lib.inc macro.inc word.asm
 	$(ASM) $(AFLAGS) itc.asm 
 
 clean:
