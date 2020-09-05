@@ -39,6 +39,26 @@ find_test_impl:
 	xor rax, rax
 	ret
 
+cfa_test_impl:
+;;; previous word
+	add rdi, 8
+;;; word
+	.loop:
+	push rdi
+	mov al, [rdi]
+	test al, al
+	jz .exit
+	pop rdi
+	add rdi, 1
+	jmp .loop
+	.exit:
+	pop rdi
+	add rdi, 1
+;;; flag
+	add rdi, 1
+	mov rax, rdi
+	ret
+
 find_test:
 	mov rdi, testdata
 	mov rsi, w_dict_entry_stub
@@ -47,7 +67,7 @@ find_test:
 
 cfa_test:
 	mov rdi, w_bye 	; w_find is test word
-	call i_cfa
+	call cfa_test_impl
 	call test_bye
 
 find_and_cfa_test:
@@ -55,7 +75,7 @@ find_and_cfa_test:
 	mov rsi, w_dict_entry_stub
 	call find_test_impl
 	mov rdi, rax
-	call i_cfa
+	call cfa_test_impl
 	call test_bye
 
 test_bye:

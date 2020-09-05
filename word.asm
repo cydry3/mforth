@@ -43,9 +43,10 @@ native "find", find, 0
 
 
 native "cfa", cfa, 0
-;;; previous word
+	pop rdi
+;;; previous word part
 	add rdi, 8
-;;; word
+;;; word part
 	.loop:
 	push rdi
 	mov al, [rdi]
@@ -57,10 +58,10 @@ native "cfa", cfa, 0
 	.exit:
 	pop rdi
 	add rdi, 1
-;;; flag
+;;; flag part
 	add rdi, 1
-	mov rax, rdi
-	ret
+	push rdi
+	jmp next
 
 native "bye", bye, 0
 	mov rax, 60
@@ -125,5 +126,6 @@ i_interpreter:
 	dq xt_scan
 	dq xt_inbuf
 	dq xt_find
+	dq xt_cfa
 	dq xt_printb
 	dq xt_loop
