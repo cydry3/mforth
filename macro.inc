@@ -7,7 +7,7 @@ section .data
 w_ %+ %2 :
       dq last_word
       db %1, 0
-      dq %3
+      db %3
 xt_ %+ %2: dq i_ %+ %2
 section .text
 i_ %+ %2:
@@ -19,7 +19,7 @@ i_ %+ %2:
 w_ %+ %2 :
       dq last_word
       db %1, 0
-      dq %3
+      db %3
 xt_ %+ %2: dq i_docol
 section .text
 i_ %+ %2:

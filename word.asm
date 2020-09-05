@@ -99,6 +99,12 @@ native "loop", loop, 0
 	mov pc, interpreter_stub
 	jmp next
 
+native "exec", exec, 0
+	pop rdi
+	mov qword[interpreter_stub], rdi
+	mov pc, interpreter_stub
+	jmp next
+
 native "prints", prints, 0
 	pop rdi
 	call print_string
@@ -127,5 +133,4 @@ i_interpreter:
 	dq xt_inbuf
 	dq xt_find
 	dq xt_cfa
-	dq xt_printb
-	dq xt_loop
+	dq xt_exec
