@@ -49,14 +49,6 @@ i_find:
 	xor rax, rax
 	ret
 
-find_test:
-	mov rdi, testdata
-	mov rsi, w_dict_entry_stub
-	call i_find
-	mov rax, 60
-	xor rdi, rdi
-	syscall
-
 cfa:
 ;;; previous word
 	add rdi, 8
@@ -77,12 +69,16 @@ cfa:
 	mov rax, rdi
 	ret
 
+find_test:
+	mov rdi, testdata
+	mov rsi, w_dict_entry_stub
+	call i_find
+	call test_exit
+
 cfa_test:
 	mov rdi, w_exit 	; w_find is test word
 	call cfa
-	mov rax, 60
-	xor rdi, rdi
-	syscall
+	call test_exit
 
 find_and_cfa_test:
 	mov rdi, testdata
@@ -90,6 +86,9 @@ find_and_cfa_test:
 	call i_find
 	mov rdi, rax
 	call cfa
+	call test_exit
+
+test_exit:
 	mov rax, 60
 	xor rdi, rdi
 	syscall
