@@ -90,6 +90,20 @@ native "word", word, 0
 	push rdx
 	jmp next
 
+native "empty", empty, 0
+	pop rax
+	push rax
+
+	test rax, rax
+	jnz .exit
+
+	pop rax
+	xor rax, rax
+	jmp i_bye
+
+	.exit
+	jmp next
+
 native "drop", drop, 0
 	add rsp, 8
 	jmp next
@@ -132,5 +146,6 @@ i_interpreter:
 	dq xt_scan
 	dq xt_inbuf
 	dq xt_find
+	dq xt_empty
 	dq xt_cfa
 	dq xt_exec
