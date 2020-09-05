@@ -95,10 +95,20 @@ native "loop", loop, 0
 	mov pc, interpreter_stub
 	jmp next
 
+native "prints", prints, 0
+	pop rdi
+	call print_string
+	jmp next
+
 colon "scan", scan, 0
 	dq xt_inbuf
 	dq xt_word
 	dq xt_drop
+	dq xt_exit
+
+colon "printb", printb, 0
+	dq xt_inbuf
+	dq xt_prints
 	dq xt_exit
 
 native "dict_entry_stub", dict_entry_stub, 0
@@ -110,4 +120,5 @@ interpreter_stub: dq 0
 xt_interpreter: dq i_docol
 i_interpreter:
 	dq xt_scan
+	dq xt_printb
 	dq xt_loop
