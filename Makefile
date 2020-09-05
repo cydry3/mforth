@@ -11,3 +11,9 @@ itc.o: itc.asm lib.inc
 
 clean:
 	rm -f main itc.o
+
+asm:
+	nasm -E word.inc
+
+.PHONY:
+	clean asm
