@@ -1,5 +1,7 @@
 %include "macro.inc"
 
+native "find", find, 0
+
 native "cfa", cfa, 0
 
 native "exit", exit, 0

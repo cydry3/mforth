@@ -1,7 +1,6 @@
 %include "lib.inc"
 %include "macro.inc"
 
-
 	global _start
 
 	section .data
@@ -58,6 +57,33 @@ find_test:
 	xor rdi, rdi
 	syscall
 
+cfa:
+;;; previous word
+	add rdi, 8
+;;; word
+	.loop:
+	push rdi
+	mov al, [rdi]
+	test al, al
+	jz .exit
+	pop rdi
+	add rdi, 1
+	jmp .loop
+	.exit:
+	pop rdi
+	add rdi, 1
+;;; flag
+	add rdi, 1
+	mov rax, rdi
+	ret
+
+cfa_test:
+	mov rdi, w_exit 	; w_find is test word
+	call cfa
+	mov rax, 60
+	xor rdi, rdi
+	syscall
+
 _start:
-	jmp find_test
+	jmp cfa_test
 	
