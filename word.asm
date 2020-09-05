@@ -97,12 +97,14 @@ native "empty", empty, 0
 	test rax, rax
 	jnz .exit
 
-	pop rax
-	xor rax, rax
-	add pc, 16
+	mov rax, [pc]
+	add pc, 8
+	add pc, rax
+	pop rax			; drop stack top
 	jmp next
 
 	.exit
+	add pc, 8
 	jmp next
 
 native "drop", drop, 0
@@ -148,6 +150,7 @@ i_interpreter:
 	dq xt_inbuf
 	dq xt_find
 	dq xt_empty
+	dq 16
 	dq xt_cfa
 	dq xt_exec
 	dq xt_loop
