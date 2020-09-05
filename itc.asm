@@ -84,6 +84,16 @@ cfa_test:
 	xor rdi, rdi
 	syscall
 
+find_and_cfa_test:
+	mov rdi, testdata
+	mov rsi, w_dict_entry_stub
+	call i_find
+	mov rdi, rax
+	call cfa
+	mov rax, 60
+	xor rdi, rdi
+	syscall
+
 _start:
-	jmp cfa_test
+	jmp find_and_cfa_test
 	
