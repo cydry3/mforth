@@ -30,7 +30,6 @@ next:
 	add pc, 8
 	jmp [w]
 
-
 ;;; interpreter loop
 	section .data
 interpreter_stub: dq 0
@@ -40,6 +39,7 @@ i_interpreter:
 	dq xt_inbuf
 	dq xt_word
 	dq xt_drop
+	dq xt_loop
 	dq xt_exit
 	
 _start:

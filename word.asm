@@ -90,4 +90,9 @@ native "drop", drop, 0
 	add rsp, 8
 	jmp next
 
+native "loop", loop, 0
+	mov qword[interpreter_stub], xt_bye
+	mov pc, interpreter_stub
+	jmp next
+
 native "dict_entry_stub", dict_entry_stub, 0
