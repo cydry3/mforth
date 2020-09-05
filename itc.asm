@@ -16,8 +16,10 @@ testdata:
 	;; ptr to string
 	;; ptr to word header, or zero if nothing
 i_find:
+	push rsi
 	.loop:
 	;; check if word header is NOT NULL
+	pop rsi
 	push rsi
 	test rsi, rsi
 	jz .exit
