@@ -99,7 +99,8 @@ native "empty", empty, 0
 
 	pop rax
 	xor rax, rax
-	jmp i_bye
+	add pc, 16
+	jmp next
 
 	.exit
 	jmp next
@@ -149,3 +150,4 @@ i_interpreter:
 	dq xt_empty
 	dq xt_cfa
 	dq xt_exec
+	dq xt_loop
