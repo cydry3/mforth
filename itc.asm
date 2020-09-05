@@ -36,11 +36,8 @@ interpreter_stub: dq 0
 	section .text
 xt_interpreter: dq i_docol
 i_interpreter:
-	dq xt_inbuf
-	dq xt_word
-	dq xt_drop
+	dq xt_scan
 	dq xt_loop
-	dq xt_exit
-	
+
 _start:
 	jmp init

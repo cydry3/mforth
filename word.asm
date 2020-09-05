@@ -91,8 +91,14 @@ native "drop", drop, 0
 	jmp next
 
 native "loop", loop, 0
-	mov qword[interpreter_stub], xt_bye
+	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
 	jmp next
+
+colon "scan", scan, 0
+	dq xt_inbuf
+	dq xt_word
+	dq xt_drop
+	dq xt_exit
 
 native "dict_entry_stub", dict_entry_stub, 0
