@@ -102,3 +102,12 @@ colon "scan", scan, 0
 	dq xt_exit
 
 native "dict_entry_stub", dict_entry_stub, 0
+
+;;; interpreter loop
+	section .data
+interpreter_stub: dq 0
+	section .text
+xt_interpreter: dq i_docol
+i_interpreter:
+	dq xt_scan
+	dq xt_loop
