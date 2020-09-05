@@ -64,4 +64,16 @@ native "bye", bye, 0
 	xor rdi, rdi
 	syscall
 
+native "docol", docol, 0
+	sub rstack, 8
+	mov [rstack], pc
+	add w, 8
+	mov pc, w
+	jmp next
+
+native "exit", exit, 0
+	mov pc, [rstack]
+	add rstack, 8
+	jmp next
+
 native "dict_entry_stub", dict_entry_stub, 0
