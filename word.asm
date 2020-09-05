@@ -1,9 +1,12 @@
 %include "macro.inc"
 
-	;; ( addr -- addr )
-	;; ptr to string
+	;; ( addr, addr -- addr )
+	;; ptr to dict entrypoint, and ptr to string
 	;; ptr to word header, or zero if nothing
 native "find", find, 0
+	pop rdi				; string
+	mov rsi, w_dict_entry_stub	; dict entrypoint
+
 	push rsi
 	.loop:
 	;; check if word header is NOT NULL
@@ -29,14 +32,14 @@ native "find", find, 0
 	jz .loop
 
 	pop rsi
-	mov rax, rsi
-	ret
+	push rsi
+	jmp next
 
 	.exit:
 	pop rsi
 	xor rsi, rsi
-	xor rax, rax
-	ret
+	push rsi
+	jmp next
 
 
 native "cfa", cfa, 0
@@ -120,5 +123,7 @@ interpreter_stub: dq 0
 xt_interpreter: dq i_docol
 i_interpreter:
 	dq xt_scan
+	dq xt_inbuf
+	dq xt_find
 	dq xt_printb
 	dq xt_loop
