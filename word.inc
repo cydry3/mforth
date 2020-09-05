@@ -1,9 +1,5 @@
 %include "macro.inc"
 
-native "find", find
-native "cfa", cfa
+native "cfa", cfa, 0
 
-native "+", plus
-    pop rax
-    add [rsp], rax
-    jmp next
+native "dict_entry_stub", dict_entry_stub, 0
