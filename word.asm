@@ -242,13 +242,15 @@ native "parseui", parseui, 0
 
 ;;; ( -- )
 native "stprint", stprint, 0
-	mov [stack_cur], rsp
+	mov rax, [stack_base]
+	lea rax, [rax - 8]
+	mov [stack_cur], rax
 
 	.loop:
 	mov rax, [stack_cur]
-	mov rdi, [stack_base]
+	mov rdi, rsp
 	cmp rax, rdi
-	jl .p
+	jge .p
 	xor rax, rax
 	xor rdi, rdi
 	jmp next
@@ -261,7 +263,7 @@ native "stprint", stprint, 0
 	call print_char
 
 	mov rax, [stack_cur]
-	lea rax, [rax + 8]
+	lea rax, [rax - 8]
 	mov [stack_cur], rax
 	jmp .loop
 
