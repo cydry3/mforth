@@ -211,6 +211,23 @@ native "not", not, 0
 	push 1
 	jmp next
 
+;;; ( a b c -- b c a )
+native "rot", rot, 0
+	lea rax, [rsp + 16]  	; a
+	lea rdi, [rsp +  8]	; b
+	mov rcx, [rax]		; tmp <- a
+	mov rsi, [rdi]
+	mov [rax], rsi		; 0 <- b
+	mov [rdi], rcx		; 1 <- tmp(a)
+
+	mov rax, rsp		; c
+	mov rcx, [rax]
+	mov rsi, [rdi]		; a
+	mov [rdi], rcx		; 2 <- c
+	mov [rax], rsi		; 3 <- a
+
+	jmp next
+
 native "loop", loop, 0
 	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
