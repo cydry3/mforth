@@ -90,7 +90,7 @@ native "word", word, 0
 	push rdx
 	jmp next
 
-native "empty", empty, 0
+native "zerobranch", zerobranch, 0
 	pop rax
 	push rax
 
@@ -149,7 +149,7 @@ i_interpreter:
 	dq xt_scan
 	dq xt_inbuf
 	dq xt_find
-	dq xt_empty
+	dq xt_zerobranch
 	dq 16
 	dq xt_cfa
 	dq xt_exec
