@@ -239,6 +239,12 @@ native "swap", swap, 0
 
 	jmp next
 
+;;; ( a -- a a )
+native "dup", dup, 0
+	mov rax, [rsp]
+	push rax
+	jmp next
+
 native "loop", loop, 0
 	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
