@@ -350,6 +350,14 @@ native "@", load, 0
 	push rax
 	jmp next
 
+;;; ( address -- char )
+native "c@", loadch, 0
+	pop rax
+	mov al, byte[rax]
+	movzx rax, al
+	push rax
+	jmp next
+
 colon "number", number, 0
 	dq xt_inbuf
 	dq xt_word
