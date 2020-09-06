@@ -154,6 +154,29 @@ native "/", div, 0
 	push rax		; rdx = Quotient, rdx = remainder
 	jmp next
 
+native "=", equal, 0
+	pop rdi
+	pop rax
+	cmp rax, rdi
+	jz .eq
+	push 0
+	jmp next
+	.eq:
+	push 1
+	jmp next
+
+native "<", lessthan, 0
+	pop rdi
+	pop rax
+	cmp rax, rdi
+	jl .less
+	push 0
+	jmp next
+
+	.less:
+	push 1
+	jmp next
+
 native "loop", loop, 0
 	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
