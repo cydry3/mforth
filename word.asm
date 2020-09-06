@@ -377,6 +377,13 @@ colon "or", or, 0
 
 	dq xt_exit
 
+;;; ( a b -- bool )
+;;; greter
+colon ">", greater, 0
+	dq xt_lessthan
+	dq xt_not
+	dq xt_exit
+
 colon "number", number, 0
 	dq xt_inbuf
 	dq xt_word
