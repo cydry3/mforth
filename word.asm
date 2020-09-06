@@ -125,6 +125,13 @@ native "drop", drop, 0
 	add rsp, 8
 	jmp next
 
+native "+", plus, 0
+	pop rdi
+	pop rax
+	add rax, rdi
+	push rax
+	jmp next
+
 native "loop", loop, 0
 	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
