@@ -103,7 +103,7 @@ native "zerobranch", zerobranch, 0
 	pop rax			; drop stack top
 	jmp next
 
-	.exit
+	.exit:
 	add pc, 8
 	jmp next
 
@@ -138,6 +138,16 @@ native "parseui", parseui, 0
 	push rax
 	jmp next
 
+native "sttop", sttop, 0,
+	push rsp
+
+;;; ( -- )
+native "stprint", stprint, 0
+	mov rax, [rsp]
+	mov rdi, rax
+	call print_uint
+	jmp next
+
 colon "scan", scan, 0
 	dq xt_inbuf
 	dq xt_word
@@ -166,5 +176,6 @@ i_interpreter:
 	dq xt_exec
 	dq xt_inbuf
 	dq xt_parseui
-	dq xt_printui
+	dq xt_stprint
 	dq xt_loop
+r
