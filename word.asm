@@ -121,6 +121,7 @@ native "nonum", nonum, 0
 	push 1
 	jmp next
 
+;;; ( a -- )
 native "drop", drop, 0
 	add rsp, 8
 	jmp next
