@@ -302,6 +302,13 @@ native "stprint", stprint, 0
 	mov [stack_cur], rax
 	jmp .loop
 
+native ".", popprint, 0
+	pop rdi
+	call print_uint
+	mov rdi, ' '
+	call print_char
+	jmp next
+
 colon "scan", scan, 0
 	dq xt_inbuf
 	dq xt_word
