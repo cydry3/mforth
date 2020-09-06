@@ -138,9 +138,6 @@ native "parseui", parseui, 0
 	push rax
 	jmp next
 
-native "sttop", sttop, 0,
-	push rsp
-
 ;;; ( -- )
 native "stprint", stprint, 0
 	mov [stack_cur], rsp
