@@ -117,10 +117,11 @@ native "loop", loop, 0
 
 native "exec", exec, 0
 	pop rdi
-	mov qword[interpreter_stub], rdi
-	mov pc, interpreter_stub
-	mov w, [pc]
+	
+	mov pc, xt_interpreter
 	add pc, 8
+	mov qword[interpreter_stub], rdi
+	mov w, [interpreter_stub]
 	jmp [w]
 
 native "prints", prints, 0
@@ -173,6 +174,10 @@ colon "scan", scan, 0
 colon "printb", printb, 0
 	dq xt_inbuf
 	dq xt_prints
+	dq xt_exit
+
+colon ".s", dotst, 0
+	dq xt_stprint
 	dq xt_exit
 
 native "dict_entry_stub", dict_entry_stub, 0
