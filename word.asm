@@ -343,6 +343,13 @@ native "c!", storech, 0
 	mov byte[rax], dil
 	jmp next
 
+;;; ( address -- value )
+native "@", load, 0
+	pop rax
+	mov rax, [rax]
+	push rax
+	jmp next
+
 colon "number", number, 0
 	dq xt_inbuf
 	dq xt_word
