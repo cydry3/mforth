@@ -117,10 +117,9 @@ native "loop", loop, 0
 
 native "exec", exec, 0
 	pop rdi
-	
+	mov qword[interpreter_stub], rdi
 	mov pc, xt_interpreter
 	add pc, 8
-	mov qword[interpreter_stub], rdi
 	mov w, [interpreter_stub]
 	jmp [w]
 
