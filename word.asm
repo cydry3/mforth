@@ -325,6 +325,10 @@ native "emit", emit, 0
 	call print_char
 	jmp next
 
+native "mem", mem, 0
+	push forth_mem
+	jmp next
+
 colon "number", number, 0
 	dq xt_inbuf
 	dq xt_word

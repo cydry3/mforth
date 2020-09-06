@@ -13,6 +13,7 @@ rstack_start:	 resq 1
 input_buffer:	 resb 1024
 stack_base:	resq 1
 stack_cur:	resq 1
+forth_mem:	resq 65536
 
 %include "word.asm"
 
