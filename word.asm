@@ -177,6 +177,29 @@ native "<", lessthan, 0
 	push 1
 	jmp next
 
+native "and", and, 0
+	pop rdi
+	pop rax
+
+	test rdi, rdi
+	jz .A
+	mov rdi, 1
+	.A:
+	test rax, rax
+	jz .B
+	mov rax, 1
+	.B:
+
+	and rax, rdi
+	cmp rax, 1
+	je .true
+	push 0
+	jmp next
+
+	.true:
+	push 1
+	jmp next
+
 native "loop", loop, 0
 	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
