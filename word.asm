@@ -275,6 +275,12 @@ native "parseui", parseui, 0
 	push rax
 	jmp next
 
+native "parsei", parsei, 0
+	pop rdi
+	call parse_int
+	push rax
+	jmp next
+
 ;;; ( -- )
 native "stprint", stprint, 0
 	mov rax, [stack_base]
@@ -318,6 +324,14 @@ native "emit", emit, 0
 	pop rdi
 	call print_char
 	jmp next
+
+colon "number", number, 0
+	dq xt_inbuf
+	dq xt_word
+	dq xt_drop
+	dq xt_inbuf
+	dq xt_parsei
+	dq xt_exit
 
 colon "scan", scan, 0
 	dq xt_inbuf
