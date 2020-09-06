@@ -213,7 +213,8 @@ i_interpreter:
 	dq xt_inbuf
 	dq xt_nonum
 	dq xt_zerobranch
-	dq 8
+	dq 16
+	dq xt_drop
 	dq xt_loop
 
 	dq xt_inbuf
