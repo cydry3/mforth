@@ -200,6 +200,17 @@ native "and", and, 0
 	push 1
 	jmp next
 
+native "not", not, 0
+	pop rax
+	test rax, rax
+	jz .zero
+	push 0
+	jmp next
+
+	.zero:
+	push 1
+	jmp next
+
 native "loop", loop, 0
 	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
