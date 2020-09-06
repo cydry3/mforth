@@ -143,10 +143,25 @@ native "sttop", sttop, 0,
 
 ;;; ( -- )
 native "stprint", stprint, 0
-	mov rax, [rsp]
-	mov rdi, rax
-	call print_uint
+	mov [stack_cur], rsp
+
+	.loop:
+	mov rax, [stack_cur]
+	mov rdi, [stack_base]
+	cmp rax, rdi
+	jl .p
+	xor rax, rax
+	xor rdi, rdi
 	jmp next
+	
+	.p:
+	mov rax, [stack_cur]
+	mov rdi, [rax]
+	call print_uint
+	mov rax, [stack_cur]
+	lea rax, [rax + 8]
+	mov [stack_cur], rax
+	jmp .loop
 
 colon "scan", scan, 0
 	dq xt_inbuf
@@ -178,4 +193,4 @@ i_interpreter:
 	dq xt_parseui
 	dq xt_stprint
 	dq xt_loop
-r
+
