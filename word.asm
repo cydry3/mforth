@@ -228,6 +228,17 @@ native "rot", rot, 0
 
 	jmp next
 
+;;; ( a b -- b a )
+native "swap", swap, 0
+	mov rax, rsp		; b
+	lea rdi, [rsp + 8]	; a
+	mov rcx, [rax]
+	mov rsi, [rdi]
+	mov [rax], rsi		; 0 <- b
+	mov [rdi], rcx		; 1 <- a
+
+	jmp next
+
 native "loop", loop, 0
 	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
