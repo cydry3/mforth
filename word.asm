@@ -314,6 +314,11 @@ native "key", key, 0
 	push rax
 	jmp next
 
+native "emit", emit, 0
+	pop rdi
+	call print_char
+	jmp next
+
 colon "scan", scan, 0
 	dq xt_inbuf
 	dq xt_word
