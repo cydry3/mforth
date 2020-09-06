@@ -329,6 +329,13 @@ native "mem", mem, 0
 	push forth_mem
 	jmp next
 
+;;; ( address data -- )
+native "!", store, 0
+	pop rdi
+	pop rax
+	mov [rax], rdi
+	jmp next
+
 colon "number", number, 0
 	dq xt_inbuf
 	dq xt_word
