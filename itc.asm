@@ -15,7 +15,6 @@ stack_base:	resq 1
 stack_cur:	resq 1
 
 %include "word.asm"
-%include "test.asm"
 
 	section .text
 

@@ -4,7 +4,6 @@
 	;; ptr to dict entrypoint, and ptr to string
 	;; ptr to word header, or zero if nothing
 native "find", find, 0
-	pop rdi				; string
 	mov rsi, w_dict_entry_stub	; dict entrypoint
 
 	push rsi
@@ -26,7 +25,7 @@ native "find", find, 0
 	;; successive headerpointer
 	push rsi
 	add rsi, 8
-
+	mov rdi, input_buffer
 	call string_equals
 	test al, al
 	jz .loop
@@ -120,7 +119,9 @@ native "exec", exec, 0
 	pop rdi
 	mov qword[interpreter_stub], rdi
 	mov pc, interpreter_stub
-	jmp next
+	mov w, [pc]
+	add pc, 8
+	jmp [w]
 
 native "prints", prints, 0
 	pop rdi
@@ -183,7 +184,6 @@ interpreter_stub: dq 0
 xt_interpreter: dq i_docol
 i_interpreter:
 	dq xt_scan
-	dq xt_inbuf
 	dq xt_find
 	dq xt_zerobranch
 	dq 16
@@ -191,6 +191,5 @@ i_interpreter:
 	dq xt_exec
 	dq xt_inbuf
 	dq xt_parseui
-	dq xt_stprint
 	dq xt_loop
 
