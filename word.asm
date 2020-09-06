@@ -358,6 +358,25 @@ native "c@", loadch, 0
 	push rax
 	jmp next
 
+;;; ( a b -- bool )
+colon "or", or, 0
+	dq xt_dup		; b2 -> ( a b b )
+	dq xt_rot		; ( b b a )
+	dq xt_dup		; ( b b a a )
+
+	dq xt_and		; ( b b c )
+	dq xt_not		; ( b b m )
+
+	dq xt_rot		; ( b m b )
+	dq xt_rot		; ( m b b )
+	dq xt_and		; ( m d )
+	dq xt_not		; ( m n )
+
+	dq xt_and		; ( x )
+	dq xt_not		; ( y )
+
+	dq xt_exit
+
 colon "number", number, 0
 	dq xt_inbuf
 	dq xt_word
