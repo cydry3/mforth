@@ -139,6 +139,21 @@ native "-", minus, 0
 	push rax
 	jmp next
 
+native "*", mul, 0
+	pop rdi
+	pop rax
+	mul rdi		; rdx:rax = r/m64 * r/m64
+	push rax	; return only 64bits. otherwise treat as overflow.
+	jmp next
+
+native "/", div, 0
+	xor rdx, rdx
+	pop rdi
+	pop rax
+	div rdi			; rdx:rax = rdx:rax div r/m64
+	push rax		; rdx = Quotient, rdx = remainder
+	jmp next
+
 native "loop", loop, 0
 	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
