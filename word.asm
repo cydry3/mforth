@@ -158,6 +158,9 @@ native "stprint", stprint, 0
 	mov rax, [stack_cur]
 	mov rdi, [rax]
 	call print_uint
+	mov rdi, ' '
+	call print_char
+
 	mov rax, [stack_cur]
 	lea rax, [rax + 8]
 	mov [stack_cur], rax
