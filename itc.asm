@@ -11,7 +11,7 @@
 	resq 1023
 rstack_start:	 resq 1
 input_buffer:	 resb 1024
-
+	
 %include "word.asm"
 %include "test.asm"
 

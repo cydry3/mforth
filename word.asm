@@ -127,6 +127,17 @@ native "prints", prints, 0
 	call print_string
 	jmp next
 
+native "printui", printui, 0
+	pop rdi
+	call print_uint
+	jmp next
+
+native "parseui", parseui, 0
+	pop rdi
+	call parse_uint
+	push rax
+	jmp next
+
 colon "scan", scan, 0
 	dq xt_inbuf
 	dq xt_word
@@ -153,4 +164,7 @@ i_interpreter:
 	dq 16
 	dq xt_cfa
 	dq xt_exec
+	dq xt_inbuf
+	dq xt_parseui
+	dq xt_printui
 	dq xt_loop
