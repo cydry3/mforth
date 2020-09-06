@@ -106,6 +106,21 @@ native "zerobranch", zerobranch, 0
 	add pc, 8
 	jmp next
 
+native "nonum", nonum, 0
+	pop rax
+	mov al, byte[rax]
+	mov dil, al
+	cmp al, '0'
+	jl .exit
+	cmp dil, '9'
+	jg .exit
+	push 0
+	jmp next
+
+	.exit:
+	push 1
+	jmp next
+
 native "drop", drop, 0
 	add rsp, 8
 	jmp next
@@ -188,11 +203,19 @@ interpreter_stub: dq 0
 xt_interpreter: dq i_docol
 i_interpreter:
 	dq xt_scan
+
 	dq xt_find
 	dq xt_zerobranch
 	dq 16
 	dq xt_cfa
 	dq xt_exec
+
+	dq xt_inbuf
+	dq xt_nonum
+	dq xt_zerobranch
+	dq 8
+	dq xt_loop
+
 	dq xt_inbuf
 	dq xt_parseui
 	dq xt_loop
