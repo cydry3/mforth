@@ -309,6 +309,11 @@ native ".", popprint, 0
 	call print_char
 	jmp next
 
+native "key", key, 0
+	call read_char
+	push rax
+	jmp next
+
 colon "scan", scan, 0
 	dq xt_inbuf
 	dq xt_word
