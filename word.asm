@@ -337,6 +337,10 @@ native "here", here, 0
 	push ext_dict_here
 	jmp next
 
+native "last_word", last_def_word_addr, 0
+	push last_def_word
+	jmp next
+
 ;;; ( address data -- )
 native "!", store, 0
 	pop rdi
