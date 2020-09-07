@@ -358,6 +358,12 @@ native "c@", loadch, 0
 	push rax
 	jmp next
 
+native ":", col_comp, 0
+	jmp next
+
+native ";", sem_comp, 0
+	jmp next
+
 ;;; ( a b -- bool )
 colon "or", or, 0
 	dq xt_dup		; b2 -> ( a b b )
