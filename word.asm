@@ -379,6 +379,17 @@ native "outcomp", outcomp, 0
 	jmp next
 
 colon ":", col_comp, 0
+	dq xt_here
+	dq xt_load
+	dq xt_last_def_word_addr
+	dq xt_load
+	dq xt_store
+
+	dq xt_last_def_word_addr
+	dq xt_here
+	dq xt_load
+	dq xt_store
+
 	dq xt_incomp
 	dq xt_exit
 
