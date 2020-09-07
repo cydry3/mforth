@@ -145,6 +145,12 @@ native "branch", branch, 0
 	add pc, 8
 	jmp next
 
+native "lit", lit, 0
+       mov rax, [pc]
+       add pc, 8
+       push rax
+       jmp next
+
 native "nonum", nonum, 0
 	pop rax
 	mov al, byte[rax]
@@ -454,6 +460,11 @@ native "docoli", docoli, 0
 native "exit_addr", exit_addr, 0
 	push xt_exit
 	jmp next
+
+;;; push xt_lit address
+native "lit_addr", lit_addr, 0
+       push xt_lit
+       jmp next
 
 ;;; ( n -- )
 ;;; increments here pointer by n
