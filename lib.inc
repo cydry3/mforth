@@ -102,11 +102,11 @@ read_char:
     ret 
 
 read_word:
-    push r14
-    push r15
-    xor r14, r14
-    xor r15, rsi
-    dec r15
+    push r8
+    push r9
+    xor r8, r8
+    xor r9, rsi
+    dec r9
 
     .A:
     push rdi
@@ -124,8 +124,8 @@ read_word:
     jz .C
 
     .B:
-    mov byte[rdi + r14], al
-    inc r14
+    mov byte[rdi + r8], al
+    inc r8
 
     push rdi
     call read_char
@@ -140,24 +140,24 @@ read_word:
     je .C
     test al, al
     jz .C
-    cmp r14, r15
+    cmp r8, r9
     je .D
 
     jmp .B
 
     .C:
-    mov byte[rdi + r14], 0
+    mov byte[rdi + r8], 0
     mov rax, rdi
 
-    mov rdx, r14
-    pop r15
-    pop r14
+    mov rdx, r8
+    pop r9
+    pop r8
     ret
 
     .D:
     xor rax, rax
-    pop r15
-    pop r14
+    pop r9
+    pop r8
     ret
 
 ; rdi points to a string
