@@ -255,12 +255,12 @@ native "loop", loop, 0
 	.interp:
 	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
-	jmp .exit:
+	jmp .exit
 
 	.compile:
 	mov qword[compiler_stub], xt_compiler
 	mov pc, compiler_stub
-	jmp .exit:
+	jmp .exit
 
 	.exit:
 	jmp next
