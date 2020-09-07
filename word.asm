@@ -333,6 +333,10 @@ native "status", status, 0
 	push mode
 	jmp next
 
+native "here", here, 0
+	push ext_dict_here
+	jmp next
+
 ;;; ( address data -- )
 native "!", store, 0
 	pop rdi

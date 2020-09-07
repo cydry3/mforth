@@ -16,7 +16,7 @@ stack_cur:	resq 1
 forth_mem:	resq 65536
 last_def_word:	resq 1
 extended_dict:	resq 65536
-here:		resq 1
+ext_dict_here:	resq 1
 mode:		resq 1
 
 %include "word.asm"
@@ -28,7 +28,7 @@ main: dq xt_interpreter
 
 init:
 	mov qword[mode], 0
-	mov qword[here], extended_dict
+	mov qword[ext_dict_here], extended_dict
 	mov qword[last_def_word], w_dict_entry_stub
 	mov [stack_base], rsp
 	mov rax, [stack_base]
