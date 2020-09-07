@@ -609,9 +609,8 @@ i_compiler:
 	dq xt_scan
 
 	dq xt_find
-	dq xt_branch
-	dq 8
-	dq xt_loop
+	dq xt_zerobranch
+	dq 128
 
 	dq xt_cfa
 	dq xt_imm
@@ -629,5 +628,6 @@ i_compiler:
 
 	dq xt_cellen
 	dq xt_hereinc
+	dq xt_loop
 
 	dq xt_loop
