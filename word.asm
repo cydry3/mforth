@@ -128,6 +128,23 @@ native "zerobranch", zerobranch, 0
 	add pc, 8
 	jmp next
 
+native "branch", branch, 0
+	pop rax
+	push rax
+
+	test rax, rax
+	jz .exit
+
+	mov rax, [pc]
+	add pc, 8
+	add pc, rax
+	jmp next
+
+	.exit:
+	pop rax			; drop stack top
+	add pc, 8
+	jmp next
+
 native "nonum", nonum, 0
 	pop rax
 	mov al, byte[rax]
@@ -592,13 +609,13 @@ i_compiler:
 	dq xt_scan
 
 	dq xt_find
-	dq xt_zerobranch
-	dq 48
+	dq xt_branch
+	dq 8
+	dq xt_loop
+
 	dq xt_cfa
 	dq xt_imm
 	dq xt_zerobranch
 	dq 16
 	dq xt_exec
-	dq xt_loop
-
 	dq xt_loop
