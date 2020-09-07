@@ -4,7 +4,7 @@
 	;; ptr to dict entrypoint, and ptr to string
 	;; ptr to word header, or zero if nothing
 native "find", find, 0
-	mov rsi, w_dict_entry_stub	; dict entrypoint
+	mov rsi, last_def_word ; dict entrypoint
 
 	push rsi
 	.loop:
