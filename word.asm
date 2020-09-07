@@ -329,6 +329,10 @@ native "mem", mem, 0
 	push forth_mem
 	jmp next
 
+native "status", status, 0
+	push mode
+	jmp next
+
 ;;; ( address data -- )
 native "!", store, 0
 	pop rdi
@@ -359,9 +363,11 @@ native "c@", loadch, 0
 	jmp next
 
 native ":", col_comp, 0
+	mov qword[mode], 1
 	jmp next
 
 native ";", sem_comp, 0
+	mov qword[mode], 0
 	jmp next
 
 ;;; ( a b -- bool )
