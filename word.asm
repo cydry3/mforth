@@ -619,3 +619,15 @@ i_compiler:
 	dq 16
 	dq xt_exec
 	dq xt_loop
+
+	dq xt_find	; store xt_word
+	dq xt_cfa
+	dq xt_here
+	dq xt_load
+	dq xt_swap
+	dq xt_store
+
+	dq xt_cellen
+	dq xt_hereinc
+
+	dq xt_loop
