@@ -393,6 +393,12 @@ native "wordcp", wordcp, 0
 	pop rdi
 	call string_copy
 	jmp next
+
+;;; push i_docol address
+native "docoli", docoli, 0
+	push i_docol
+	jmp next
+
 ;;; ( n -- )
 ;;; increments here pointer by n
 colon "hereinc", hereinc, 0
@@ -436,6 +442,14 @@ colon ":", col_comp, 0
 	dq xt_hereinc
 
 	dq xt_bytelen
+	dq xt_hereinc
+
+	dq xt_here
+	dq xt_load
+	dq xt_docoli
+	dq xt_store
+
+	dq xt_cellen
 	dq xt_hereinc
 
 	dq xt_incomp
