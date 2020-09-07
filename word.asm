@@ -253,10 +253,8 @@ native "loop", loop, 0
 
 native "exec", exec, 0
 	pop rdi
-	mov qword[interpreter_stub], rdi
-	mov pc, xt_interpreter
 	add pc, 8
-	mov w, [interpreter_stub]
+	mov w, rdi
 	jmp [w]
 
 native "prints", prints, 0
@@ -533,9 +531,10 @@ i_interpreter:
 
 	dq xt_find
 	dq xt_zerobranch
-	dq 16
+	dq 24
 	dq xt_cfa
 	dq xt_exec
+	dq xt_loop
 
 	dq xt_inbuf
 	dq xt_nonum
