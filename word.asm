@@ -1,4 +1,5 @@
 %include "macro.inc"
+%define immflag 1
 
 	;; ( addr, addr -- addr )
 	;; ptr to dict entrypoint, and ptr to string
@@ -60,6 +61,27 @@ native "cfa", cfa, 0
 ;;; flag part
 	add rdi, 1
 	push rdi
+	jmp next
+
+;;; ( addr -- addr )
+;;;  xt address -> xt or zero
+;;;  if it's immediate word, return xt address.
+;;;  otherwise, return 0.
+native "imm", imm, immflag
+	pop rax
+	mov rdi, rax
+;;; flag part
+	lea rax, [rax - 1]
+	mov al, byte[rax]
+	test al, al
+	jz .no
+	push rdi
+	jmp .exit
+
+	.no:
+	push 0
+
+	.exit:
 	jmp next
 
 native "bye", bye, 0
@@ -472,7 +494,7 @@ colon ":", col_comp, 0
 	dq xt_incomp
 	dq xt_exit
 
-colon ";", semi_comp, 0
+colon ";", semi_comp, 1
 	dq xt_here
 	dq xt_load
 	dq xt_exit_addr
@@ -571,8 +593,11 @@ i_compiler:
 
 	dq xt_find
 	dq xt_zerobranch
-	dq 24
+	dq 48
 	dq xt_cfa
+	dq xt_imm
+	dq xt_zerobranch
+	dq 16
 	dq xt_exec
 	dq xt_loop
 
