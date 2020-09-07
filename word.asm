@@ -399,6 +399,11 @@ native "docoli", docoli, 0
 	push i_docol
 	jmp next
 
+;;; push i_exit address
+native "exit_impl", exit_impl, 0
+	push i_exit
+	jmp next
+
 ;;; ( n -- )
 ;;; increments here pointer by n
 colon "hereinc", hereinc, 0
@@ -456,6 +461,14 @@ colon ":", col_comp, 0
 	dq xt_exit
 
 colon ";", semi_comp, 0
+	dq xt_here
+	dq xt_load
+	dq xt_exit_impl
+	dq xt_store
+
+	dq xt_cellen
+	dq xt_hereinc
+
 	dq xt_outcomp
 	dq xt_exit
 
