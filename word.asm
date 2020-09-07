@@ -378,6 +378,32 @@ native "outcomp", outcomp, 0
 	mov qword[mode], 0
 	jmp next
 
+native "cellen", cellen, 0
+	push 8
+	jmp next
+
+native "bytelen", bytelen, 0
+	push 1
+	jmp next
+
+;;; ( addr, addr, len -- )
+native "wordcp", wordcp, 0
+	pop rdx
+	pop rsi
+	pop rdi
+	call string_copy
+	jmp next
+;;; ( n -- )
+;;; increments here pointer by n
+colon "hereinc", hereinc, 0
+	dq xt_here
+	dq xt_load
+	dq xt_plus
+	dq xt_here
+	dq xt_swap
+	dq xt_store
+	dq xt_exit
+
 colon ":", col_comp, 0
 	dq xt_here
 	dq xt_load
@@ -389,6 +415,28 @@ colon ":", col_comp, 0
 	dq xt_here
 	dq xt_load
 	dq xt_store
+
+	dq xt_cellen
+	dq xt_hereinc
+
+	dq xt_inbuf
+	dq xt_word
+
+	dq xt_cellen
+	dq xt_cellen
+	dq xt_plus
+	dq xt_inbuf
+	dq xt_here
+	dq xt_load
+	dq xt_rot
+	dq xt_wordcp
+
+	dq xt_bytelen
+	dq xt_plus
+	dq xt_hereinc
+
+	dq xt_bytelen
+	dq xt_hereinc
 
 	dq xt_incomp
 	dq xt_exit
