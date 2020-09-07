@@ -399,9 +399,9 @@ native "docoli", docoli, 0
 	push i_docol
 	jmp next
 
-;;; push i_exit address
-native "exit_impl", exit_impl, 0
-	push i_exit
+;;; push xt_exit address
+native "exit_addr", exit_addr, 0
+	push xt_exit
 	jmp next
 
 ;;; ( n -- )
@@ -463,7 +463,7 @@ colon ":", col_comp, 0
 colon ";", semi_comp, 0
 	dq xt_here
 	dq xt_load
-	dq xt_exit_impl
+	dq xt_exit_addr
 	dq xt_store
 
 	dq xt_cellen
@@ -547,4 +547,3 @@ i_interpreter:
 	dq xt_inbuf
 	dq xt_parseui
 	dq xt_loop
-
