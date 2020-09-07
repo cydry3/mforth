@@ -247,8 +247,22 @@ native "dup", dup, 0
 	jmp next
 
 native "loop", loop, 0
+	mov rax, [mode]
+	test rax, rax
+	jz .interp
+	jmp .compile
+
+	.interp:
 	mov qword[interpreter_stub], xt_interpreter
 	mov pc, interpreter_stub
+	jmp .exit:
+
+	.compile:
+	mov qword[compiler_stub], xt_compiler
+	mov pc, compiler_stub
+	jmp .exit:
+
+	.exit:
 	jmp next
 
 native "exec", exec, 0
@@ -545,4 +559,21 @@ i_interpreter:
 
 	dq xt_inbuf
 	dq xt_parseui
+	dq xt_loop
+
+;;; compiler loop
+	section .data
+compiler_stub: dq 0
+	section .text
+xt_compiler: dq i_docol
+i_compiler:
+	dq xt_scan
+
+	dq xt_find
+	dq xt_zerobranch
+	dq 24
+	dq xt_cfa
+	dq xt_exec
+	dq xt_loop
+
 	dq xt_loop
