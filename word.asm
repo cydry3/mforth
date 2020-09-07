@@ -621,7 +621,7 @@ i_compiler:
 
 	dq xt_find
 	dq xt_zerobranch
-	dq 128
+	dq 120
 
 	dq xt_cfa
 	dq xt_imm
@@ -640,5 +640,27 @@ i_compiler:
 	dq xt_cellen
 	dq xt_hereinc
 	dq xt_loop
+
+	dq xt_inbuf
+	dq xt_nonum
+	dq xt_zerobranch
+	dq 16
+	dq xt_drop
+	dq xt_loop
+
+	dq xt_here		; `lit` for push number
+	dq xt_load
+	dq xt_lit_addr
+	dq xt_store
+	dq xt_cellen
+	dq xt_hereinc
+
+	dq xt_here		; store a number
+	dq xt_load
+	dq xt_inbuf
+	dq xt_parseui
+	dq xt_store
+	dq xt_cellen
+	dq xt_hereinc
 
 	dq xt_loop
