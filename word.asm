@@ -370,13 +370,21 @@ native "c@", loadch, 0
 	push rax
 	jmp next
 
-native ":", col_comp, 0
+native "incomp", incomp, 0
 	mov qword[mode], 1
 	jmp next
 
-native ";", sem_comp, 0
+native "outcomp", outcomp, 0
 	mov qword[mode], 0
 	jmp next
+
+colon ":", col_comp, 0
+	dq xt_incomp
+	dq xt_exit
+
+colon ";", semi_comp, 0
+	dq xt_outcomp
+	dq xt_exit
 
 ;;; ( a b -- bool )
 colon "or", or, 0
