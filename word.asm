@@ -111,9 +111,12 @@ native "word", word, 0
 	push rdx
 	jmp next
 
+;;; ( x -- x|nothing )
+;;; zerobranch returns x if x is not zero, otherwise
+;;; doesn't return.
 native "zerobranch", zerobranch, 0
 	pop rax
-	push rax
+	mov rdi, rax
 
 	test rax, rax
 	jnz .exit
@@ -121,16 +124,19 @@ native "zerobranch", zerobranch, 0
 	mov rax, [pc]
 	add pc, 8
 	add pc, rax
-	pop rax			; drop stack top
 	jmp next
 
 	.exit:
 	add pc, 8
+	push rdi
 	jmp next
 
+;;; ( x -- x )
+;;; jmp if x != 0
+;;; branch alway returns x. (ref. zerobranch behavier)
 native "branch", branch, 0
 	pop rax
-	push rax
+	mov rdi, rax
 
 	test rax, rax
 	jz .exit
@@ -138,10 +144,11 @@ native "branch", branch, 0
 	mov rax, [pc]
 	add pc, 8
 	add pc, rax
+	push rdi
 	jmp next
 
 	.exit:
-	pop rax			; drop stack top
+	push rdi
 	add pc, 8
 	jmp next
 
@@ -164,6 +171,26 @@ native "nonum", nonum, 0
 
 	.exit:
 	push 1
+	jmp next
+
+native "isbranch", isbranch, 0
+	mov rax, [ext_dict_here]
+	lea rax, [rax - 8]
+	mov rax, [rax]
+	mov rdi, rax
+
+	cmp rax, xt_zerobranch
+	je .eq
+	cmp rdi, xt_branch
+	je .eq
+
+	push 0
+	jmp .exit
+
+	.eq:
+	push 1
+
+	.exit:
 	jmp next
 
 ;;; ( a -- )
@@ -648,12 +675,19 @@ i_compiler:
 	dq xt_drop
 	dq xt_loop
 
+	dq xt_isbranch
+	dq xt_branch
+	dq 56
+	dq xt_drop		; drop a result of xt_isbranch
+
 	dq xt_here		; `lit` for push number
 	dq xt_load
 	dq xt_lit_addr
 	dq xt_store
 	dq xt_cellen
 	dq xt_hereinc
+
+	dq xt_drop		; drop a result of xt_isbranch
 
 	dq xt_here		; store a number
 	dq xt_load
