@@ -101,6 +101,23 @@ native "exit", exit, 0
 	add rstack, 8
 	jmp next
 
+native ">r", rstore, 0
+       pop rax
+       sub rstack, 8
+       mov [rstack], rax
+       jmp next
+
+native "r>", rload, 0
+       mov rax, [rstack]
+       add rstack, 8
+       push rax
+       jmp next
+
+native "r@", rcopy, 0
+       mov rax, [rstack]
+       push rax
+       jmp next
+
 native "inbuf", inbuf, 0
 	push qword input_buffer
 	jmp next
@@ -510,6 +527,22 @@ native "exit_addr", exit_addr, 0
 native "lit_addr", lit_addr, 0
        push xt_lit
        jmp next
+
+;;; ( call-num a1 a2 a3 a4 a5 a6 -- ret-rax )
+;;; syscall does systemcall.
+;;; arguments(convention):
+;;;   a1=rdi, a2=rsi, a3=rdx, a4=r10, a5=r8, a6=r9
+native "syscall", syscall, 0
+	pop r9
+	pop r8
+	pop r10
+	pop rdx
+	pop rsi
+	pop rdi
+	pop rax
+	syscall
+	push rax
+	jmp next
 
 ;;; ( n -- )
 ;;; increments here pointer by n
