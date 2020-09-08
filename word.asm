@@ -577,18 +577,17 @@ colon "create", create, 0
 	dq xt_cellen
 	dq xt_hereinc
 
-	dq xt_counts 	;;; n length
+	dq xt_dup		; for word length
 	
+	dq xt_here
+	dq xt_load
 	dq xt_cellen
 	dq xt_cellen
 	dq xt_plus
-	dq xt_inbuf
-	dq xt_here
-	dq xt_load
-	dq xt_rot
 	dq xt_wordcp
 
-	dq xt_bytelen
+	dq xt_counts		; word length
+	dq xt_bytelen		; word length + '\0' (1byte)
 	dq xt_plus
 	dq xt_hereinc
 
