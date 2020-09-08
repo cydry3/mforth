@@ -373,6 +373,13 @@ native "parsei", parsei, 0
 	push rax
 	jmp next
 
+;;; ( -- addr )
+native "stbase", stbase, 0
+	mov rax, qword[stack_base]
+	lea rax, [rax - 8]
+	push rax
+	jmp next
+
 ;;; ( -- )
 native "stprint", stprint, 0
 	mov rax, [stack_base]
