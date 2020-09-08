@@ -703,6 +703,7 @@ xt_compiler: dq i_docol
 i_compiler:
 	dq xt_scan
 
+	dq xt_inbuf
 	dq xt_find
 	dq xt_zerobranch
 	dq 128
