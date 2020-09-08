@@ -560,6 +560,32 @@ colon "hereinc", hereinc, 0
 	dq xt_store
 	dq xt_exit
 
+;;; ( c -- )
+;;; store c to `here` postion in dicionary.
+;;; 1 byte
+;;; In compile mode.
+colon "c,", defch, 0
+	dq xt_here
+	dq xt_load
+	dq xt_swap
+	dq xt_storech
+	dq xt_bytelen
+	dq xt_hereinc
+	dq xt_exit
+
+;;; ( xt -- )
+;;; store xt word to `here` postion in dicionary.
+;;; 1 cell ( 8 bytes )
+;;; In compile mode.
+colon ",", defxt, 0
+	dq xt_here
+	dq xt_load
+	dq xt_swap
+	dq xt_store
+	dq xt_cellen
+	dq xt_hereinc
+	dq xt_exit
+
 ;;; ( flag addr -- )
 ;;; string(address)
 colon "create", create, 0
@@ -591,13 +617,7 @@ colon "create", create, 0
 	dq xt_plus
 	dq xt_hereinc
 
-	dq xt_here		; flag ( immediate word )
-	dq xt_load
-	dq xt_swap
-	dq xt_storech
-
-	dq xt_bytelen
-	dq xt_hereinc
+	dq xt_defch		; flag ( immediate word )
 
 	dq xt_here
 	dq xt_load
@@ -607,7 +627,6 @@ colon "create", create, 0
 	dq xt_cellen
 	dq xt_hereinc
 
-	dq xt_incomp
 	dq xt_exit
 
 colon ":", col_comp, 0
@@ -615,6 +634,7 @@ colon ":", col_comp, 0
 	dq xt_bytelen		; flag
 	dq xt_inbuf		; addr
 	dq xt_create
+	dq xt_incomp		; into compiler mode
 	dq xt_exit
 
 colon ";", semi_comp, 1
