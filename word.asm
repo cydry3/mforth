@@ -606,48 +606,9 @@ colon "create", create, 0
 	dq xt_exit
 
 colon ":", col_comp, 0
-	dq xt_here
-	dq xt_load
-	dq xt_last_def_word_addr
-	dq xt_load
-	dq xt_store
-
-	dq xt_last_def_word_addr
-	dq xt_here
-	dq xt_load
-	dq xt_store
-
-	dq xt_cellen
-	dq xt_hereinc
-
+	dq xt_scan
 	dq xt_inbuf
-	dq xt_word
-
-	dq xt_cellen
-	dq xt_cellen
-	dq xt_plus
-	dq xt_inbuf
-	dq xt_here
-	dq xt_load
-	dq xt_rot
-	dq xt_wordcp
-
-	dq xt_bytelen
-	dq xt_plus
-	dq xt_hereinc
-
-	dq xt_bytelen
-	dq xt_hereinc
-
-	dq xt_here
-	dq xt_load
-	dq xt_docoli
-	dq xt_store
-
-	dq xt_cellen
-	dq xt_hereinc
-
-	dq xt_incomp
+	dq xt_create
 	dq xt_exit
 
 colon ";", semi_comp, 1
