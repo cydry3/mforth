@@ -560,7 +560,7 @@ colon "hereinc", hereinc, 0
 	dq xt_store
 	dq xt_exit
 
-;;; ( addr -- )
+;;; ( flag addr -- )
 ;;; string(address)
 colon "create", create, 0
 	dq xt_here
@@ -602,12 +602,15 @@ colon "create", create, 0
 	dq xt_cellen
 	dq xt_hereinc
 
+	dq xt_drop 		; discard temporarily
+
 	dq xt_incomp
 	dq xt_exit
 
 colon ":", col_comp, 0
 	dq xt_scan
-	dq xt_inbuf
+	dq xt_bytelen		; flag
+	dq xt_inbuf		; addr
 	dq xt_create
 	dq xt_exit
 
