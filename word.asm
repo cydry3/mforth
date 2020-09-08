@@ -1,8 +1,8 @@
 %include "macro.inc"
 %define immflag 1
 
-	;; ( addr, addr -- addr )
-	;; ptr to dict entrypoint, and ptr to string
+	;; ( addr -- addr )
+	;; ptr to string
 	;; ptr to word header, or zero if nothing
 native "find", find, 0
 	pop rdi
