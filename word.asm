@@ -224,7 +224,15 @@ native "/", div, 0
 	pop rdi
 	pop rax
 	div rdi			; rdx:rax = rdx:rax div r/m64
-	push rax		; rdx = Quotient, rdx = remainder
+	push rax		; rax = Quotient, rdx = remainder
+	jmp next
+
+native "mod", mod, 0
+	xor rdx, rdx
+	pop rdi
+	pop rax
+	div rdi			; rdx:rax = rdx:rax div r/m64
+	push rdx		; rax = Quotient, rdx = remainder
 	jmp next
 
 native "=", equal, 0
