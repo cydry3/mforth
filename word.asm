@@ -379,6 +379,12 @@ native "stbase", stbase, 0
 	lea rax, [rax - 8]
 	push rax
 	jmp next
+ 
+native "counts", counts, 0
+       pop rdi
+       call string_length
+       push rax
+       jmp next
 
 ;;; ( -- )
 native "stprint", stprint, 0
