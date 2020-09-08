@@ -131,12 +131,11 @@ native "zerobranch", zerobranch, 0
 	push rdi
 	jmp next
 
-;;; ( x -- x )
+;;; ( x -- )
 ;;; jmp if x != 0
-;;; branch alway returns x. (ref. zerobranch behavier)
+;;; consume x. (ref. zerobranch behavier)
 native "branch", branch, 0
 	pop rax
-	mov rdi, rax
 
 	test rax, rax
 	jz .exit
@@ -144,11 +143,9 @@ native "branch", branch, 0
 	mov rax, [pc]
 	add pc, 8
 	add pc, rax
-	push rdi
 	jmp next
 
 	.exit:
-	push rdi
 	add pc, 8
 	jmp next
 
@@ -698,8 +695,7 @@ i_compiler:
 
 	dq xt_isbranch
 	dq xt_branch
-	dq 56
-	dq xt_drop		; drop a result of xt_isbranch
+	dq 48
 
 	dq xt_here		; `lit` for push number
 	dq xt_load
@@ -707,8 +703,6 @@ i_compiler:
 	dq xt_store
 	dq xt_cellen
 	dq xt_hereinc
-
-	dq xt_drop		; drop a result of xt_isbranch
 
 	dq xt_here		; store a number
 	dq xt_load
