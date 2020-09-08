@@ -698,14 +698,7 @@ colon ".s", dotst, 0
 	dq xt_stprint
 	dq xt_exit
 
-native "dict_entry_stub", dict_entry_stub, 0
-
-;;; interpreter loop
-	section .data
-interpreter_stub: dq 0
-	section .text
-xt_interpreter: dq i_docol
-i_interpreter:
+colon "interpreter", interpreter, 0
 	dq xt_scan
 
 	dq xt_inbuf
@@ -727,12 +720,7 @@ i_interpreter:
 	dq xt_parseui
 	dq xt_loop
 
-;;; compiler loop
-	section .data
-compiler_stub: dq 0
-	section .text
-xt_compiler: dq i_docol
-i_compiler:
+colon "compiler", compiler, 0
 	dq xt_scan
 
 	dq xt_inbuf
@@ -785,4 +773,16 @@ i_compiler:
 	dq xt_cellen
 	dq xt_hereinc
 
+	dq xt_loop
+
+native "dict_entry_stub", dict_entry_stub, 0
+
+;;; interpreter loop
+	section .data
+interpreter_stub: dq 0
+	dq xt_loop
+
+;;; compiler loop
+	section .data
+compiler_stub: dq 0
 	dq xt_loop

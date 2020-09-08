@@ -22,10 +22,6 @@ mode:		resq 1
 %include "word.asm"
 
 	section .text
-
-main: dq xt_interpreter
-	dq xt_bye
-
 init:
 	mov qword[mode], 0
 	mov qword[ext_dict_here], extended_dict
@@ -34,7 +30,8 @@ init:
 	mov rax, [stack_base]
 	mov [stack_cur], rax
 	mov rstack, rstack_start
-	mov pc, main
+	mov qword[interpreter_stub], xt_interpreter
+	mov pc, interpreter_stub
 	jmp next
 
 next:
