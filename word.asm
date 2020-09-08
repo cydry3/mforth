@@ -591,6 +591,11 @@ colon "create", create, 0
 	dq xt_plus
 	dq xt_hereinc
 
+	dq xt_here		; flag ( immediate word )
+	dq xt_load
+	dq xt_swap
+	dq xt_storech
+
 	dq xt_bytelen
 	dq xt_hereinc
 
@@ -601,8 +606,6 @@ colon "create", create, 0
 
 	dq xt_cellen
 	dq xt_hereinc
-
-	dq xt_drop 		; discard temporarily
 
 	dq xt_incomp
 	dq xt_exit
