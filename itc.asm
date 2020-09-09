@@ -21,6 +21,14 @@ mode:		resq 1
 
 %include "word.asm"
 
+	section .data
+interpreter_stub: dq 0
+interpreter_loop: dq interpreter_stub
+
+	section .data
+compiler_stub: dq 0
+compiler_loop: dq compiler_stub
+
 	section .text
 init:
 	mov qword[mode], 0

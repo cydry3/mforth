@@ -776,13 +776,3 @@ colon "compiler", compiler, 0
 	dq xt_loop
 
 native "dict_entry_stub", dict_entry_stub, 0
-
-;;; interpreter loop
-	section .data
-interpreter_stub: dq 0
-	dq xt_loop
-
-;;; compiler loop
-	section .data
-compiler_stub: dq 0
-	dq xt_loop
